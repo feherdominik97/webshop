@@ -1,0 +1,17 @@
+{
+    "name": "feher/webshop",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dominik Fehér",
+            "email": "feherdominik97@gmail.com"
+        }
+    ],
+    "require": {
+        "ext-json": "*"
+    }
+}

@@ -1,0 +1,90 @@
+{
+  "products": [
+    {
+      "id": 3001,
+      "name": "ASUS ROG STRIX Z690-A GAMING WIFI D4",
+      "price": 136590,
+      "manufacturer": "ASUS"
+    },
+    {
+      "id": 3002,
+      "name": "LOGITECH HD Pro Webcam C920",
+      "price": 28990,
+      "manufacturer": "Logitech"
+    },
+    {
+      "id": 3003,
+      "name": "WD Blue 1TB 3.5” 7200rpm 64MB SATA WD10EZEX",
+      "price": 12990,
+      "manufacturer": "Western Digital"
+    },
+    {
+      "id": 3004,
+      "name": "GeForce GTX 1660 Ti 6GB GDDR6 TUF Gaming Evo PCIE",
+      "price": 208690,
+      "manufacturer": "ASUS"
+    },
+    {
+      "id": 3005,
+      "name": "WD Red Plus 2TB 3.5” 5400rpm 128MB SATA WD20EFZX",
+      "price": 25190,
+      "manufacturer": "Western Digital"
+    },
+    {
+      "id": 3006,
+      "name": "Kingston Fury 32GB Beast DDR4 3200MHz CL16 KF432C16BB/32",
+      "price": 48990,
+      "manufacturer": "Kingston"
+    },
+    {
+      "id": 3007,
+      "name": "LOGITECH K120 Magyar fekete OEM",
+      "price": 5790,
+      "manufacturer": "Logitech"
+    },
+    {
+      "id": 3008,
+      "name": "LOGITECH B100 fekete OEM",
+      "price": 3590,
+      "manufacturer": "Logitech"
+    }
+  ],
+  "discounts": [
+    {
+      "id": 1,
+      "is_percentage": false,
+      "value": 1000,
+      "condition": {
+        "property": "id",
+        "value": 3004
+      }
+    },
+    {
+      "id": 2,
+      "is_percentage": true,
+      "value": 0.15,
+      "condition": {
+        "property": "id",
+        "value": 3002
+      }
+    },
+    {
+      "id": 3,
+      "is_percentage": true,
+      "value": 0.05,
+      "condition": {
+        "property": "manufacturer",
+        "value": "ASUS"
+      }
+    },
+    {
+      "id": 4,
+      "is_percentage": false,
+      "value": 1000,
+      "condition": {
+        "property": "manufacturer",
+        "value": "Logitech"
+      }
+    }
+  ]
+}
