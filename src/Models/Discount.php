@@ -6,14 +6,14 @@ class Discount
 {
     private int $id;
     private bool $percentage;
-    private int $value;
+    private float $value;
     private Condition $condition;
     public function __construct($discount)
     {
-        $this->id = $discount->id;
-        $this->percentage = $discount->is_percentage;
-        $this->value = $discount->value;
-        $this->condition = new Condition($discount->condition);
+        $this->id = $discount['id'];
+        $this->percentage = $discount['is_percentage'];
+        $this->value = $discount['value'];
+        $this->condition = new Condition($discount['condition']);
     }
 
     /**
@@ -51,7 +51,7 @@ class Discount
     /**
      * @return int
      */
-    public function getValue(): int
+    public function getValue(): float
     {
         return $this->value;
     }

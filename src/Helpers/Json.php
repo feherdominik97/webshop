@@ -12,10 +12,17 @@ class Json {
      */
     public static function get($key)
     {
-        $protocol = isset($_SERVER['HTTPS']) &&
-        $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
-        $base_url = $protocol . $_SERVER['HTTP_HOST'];
+        $content = file_get_contents("./storage/webshop.json");
 
-        return json_decode(file_get_contents("$base_url/storage/webshop.json"))->{$key} ?? []; //get content of file then decode it and get the value of the key.
+        if($data = json_decode($content, true)){
+            $array_of_objects = [];
+            foreach ($data[$key] as $row) {
+                $class = "\App\Models\\$key";
+                $array_of_objects[] = new $class($row);
+            }
+            return $array_of_objects;
+        }
+
+        return null;
     }
 }

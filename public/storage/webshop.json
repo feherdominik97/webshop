@@ -1,5 +1,5 @@
 {
-  "products": [
+  "Product": [
     {
       "id": 3001,
       "name": "ASUS ROG STRIX Z690-A GAMING WIFI D4",
@@ -49,7 +49,7 @@
       "manufacturer": "Logitech"
     }
   ],
-  "discounts": [
+  "Discount": [
     {
       "id": 1,
       "is_percentage": false,

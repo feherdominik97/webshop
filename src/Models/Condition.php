@@ -9,8 +9,8 @@ class Condition
 
     public function __construct($condition)
     {
-        $this->property = $condition->property ?? null;
-        $this->value = $condition->value ?? null;
+        $this->property = $condition['property'];
+        $this->value = $condition['value'];
     }
 
     /**

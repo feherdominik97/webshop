@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Controller;
 use App\Helpers\Json;
 use App\Models\Discount;
 use App\Models\Product;
@@ -11,28 +12,22 @@ use App\Models\Product;
  */
 class ProductController extends Controller
 {
-    private array $products = [];
-    private array $discounts = [];
+    private array $products;
+    private array $discounts;
     public function __construct()
     {
-        $products = Json::get('products');
-        $discounts = Json::get('discounts');
+        $this->products = Json::get('Product') ?? [];
+        $this->discounts = Json::get('Discount') ?? [];
 
-        foreach ($discounts as $discount){
-            $this->discounts[] = new Discount($discount);
-        }
-
-        foreach ($products as $product) {
-            $product = new Product($product);
+        foreach ($this->products as $product) {
             foreach ($this->discounts as $discount) {
                 $product->calculateNewPrice($discount);
             }
-
-            $this->products[] = $product;
         }
     }
     public function index()
     {
-        return $this->products;
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($this->products);
     }
 }

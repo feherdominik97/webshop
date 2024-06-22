@@ -7,7 +7,11 @@
 
 <h1>Webshop</h1>
 
-<div id="list">reeee</div>
+<ul>
+    <?php foreach ($products ?? [] as $product) : ?>
+        <li><?= $product->getName() ?> (<?= $product->getPrice() ?>)</li>
+    <?php endforeach; ?>
+</ul>
 
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

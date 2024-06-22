@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use JsonSerializable;
+
 /**
  *
  */
-class Product
+class Product implements JsonSerializable
 {
     private int $id;
     private string $name;
@@ -18,11 +20,11 @@ class Product
      */
     public function __construct($product)
     {
-        $this->id = $product->id ?? 0;
-        $this->name = $product->name ?? '';
-        $this->price = $product->price ?? 0;
-        $this->newPrice = $product->new_price ?? 0;
-        $this->manufacturer = $product->manufacturer ?? '';
+        $this->id = $product['id'] ?? 0;
+        $this->name = $product['name'] ?? '';
+        $this->price = $product['price'] ?? 0;
+        $this->newPrice = $product['price'] ?? 0;
+        $this->manufacturer = $product['manufacturer'] ?? '';
     }
 
     /**
@@ -31,12 +33,13 @@ class Product
      */
     public function calculateNewPrice(Discount $discount)
     {
+
         if($this->{$discount->getCondition()->getProperty()} === $discount->getCondition()->getValue())
         {
             //if it is a percentage discount the price needs to be multiplied by
             // the discount and subtract the result from the original price, otherwise
             // we just need to subtract the discount from the original price.
-            $this->newPrice = $this->price - ($discount->isPercentage() ? $this->price : 1) * $discount->getValue();
+            $this->newPrice = $this->newPrice - ($discount->isPercentage() ? $this->newPrice : 1) * $discount->getValue();
         }
     }
 
@@ -118,5 +121,10 @@ class Product
     public function setManufacturer(string $manufacturer): void
     {
         $this->manufacturer = $manufacturer;
+    }
+
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
     }
 }
