@@ -28,8 +28,6 @@ class Router
      */
     public function dispatch()
     {
-        /*var_dump($this->routes);
-        die();*/
         $uri = strtok($_SERVER['REQUEST_URI'], '?');
         $method =  $_SERVER['REQUEST_METHOD'];
 

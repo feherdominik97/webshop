@@ -4,10 +4,10 @@ namespace App\Models;
 
 class Discount
 {
-    private int $id;
-    private bool $percentage;
-    private float $value;
-    private Condition $condition;
+    private $id;
+    private $percentage;
+    private $value;
+    private $condition;
     public function __construct($discount)
     {
         $this->id = $discount['id'];
@@ -47,10 +47,6 @@ class Discount
     {
         $this->percentage = $percentage;
     }
-
-    /**
-     * @return int
-     */
     public function getValue(): float
     {
         return $this->value;
@@ -64,9 +60,6 @@ class Discount
         $this->value = $value;
     }
 
-    /**
-     * @return Condition
-     */
     public function getCondition(): Condition
     {
         return $this->condition;
@@ -79,6 +72,4 @@ class Discount
     {
         $this->condition = $condition;
     }
-
-
 }

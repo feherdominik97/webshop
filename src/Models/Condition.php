@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Condition
 {
-    private string $property;
+    private $property;
     private $value;
 
     public function __construct($condition)

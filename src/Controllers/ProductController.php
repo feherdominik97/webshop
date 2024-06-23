@@ -6,16 +6,21 @@ use App\Controller;
 use App\Helpers\Json;
 use App\Models\Discount;
 use App\Models\Product;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  *
  */
 class ProductController extends Controller
 {
-    private array $products;
-    private array $discounts;
+    private $products;
+    private $discounts;
     public function __construct()
     {
+        parent::__construct();
+
         $this->products = Json::get('Product') ?? [];
         $this->discounts = Json::get('Discount') ?? [];
 
@@ -25,9 +30,14 @@ class ProductController extends Controller
             }
         }
     }
+
+    /**
+     * @throws SyntaxError
+     * @throws RuntimeError
+     * @throws LoaderError
+     */
     public function index()
     {
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($this->products);
+        $this->render('index', ['products' => $this->products]);
     }
 }

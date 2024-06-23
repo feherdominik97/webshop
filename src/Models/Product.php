@@ -9,11 +9,11 @@ use JsonSerializable;
  */
 class Product implements JsonSerializable
 {
-    private int $id;
-    private string $name;
-    private int $price;
-    private int $newPrice;
-    private string  $manufacturer;
+    private $id;
+    private $name;
+    private $price;
+    private $newPrice;
+    private $manufacturer;
 
     /**
      * @param $product
