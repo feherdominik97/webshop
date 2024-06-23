@@ -1,35 +1,35 @@
 <?php
-
 namespace App\Controllers;
 
 use App\Controller;
 use App\Helpers\Json;
-use App\Models\Discount;
-use App\Models\Product;
+use App\Models\Cart;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
 /**
- *
- */
-class ProductController extends Controller
+*
+*/
+class CartController extends Controller
 {
-    private $products;
-    private $cart;
+    public $cart;
     public function __construct()
     {
         parent::__construct();
-
-        $this->cart = Json::get('Cart')[0] ?? [];
-        $this->products = Json::get('Product') ?? [];
+        $this->cart = Json::get('Cart')[0] ?? new Cart([]);
         $discounts = Json::get('Discount') ?? [];
 
-        foreach ($this->products as $product) {
+        foreach ($this->cart->getProducts() as $product) {
             foreach ($discounts as $discount) {
                 $product->calculateNewPrice($discount);
             }
         }
+    }
+
+    public function getCart() {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($this->cart);
     }
 
     /**
@@ -39,9 +39,17 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $this->render('index', [
-            'products' => $this->products,
-            'cart' => $this->cart
-        ]);
+        $this->render('cart', ['cart' => $this->cart]);
+    }
+
+    public function store()
+    {
+
+
+    }
+
+    public function destroy()
+    {
+
     }
 }

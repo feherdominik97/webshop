@@ -2,7 +2,7 @@
 
 {% block list %}
     <ul class="list-group list-group-flush">
-        {% for product in products %}
+        {% for product in cart.products %}
             <li class="container list-group-item d-flex bg-light">
                 <div>
                     <label>Name:</label>
@@ -10,16 +10,16 @@
                     <label>Manufacturer:</label>
                     <p class="me-2">{{ product.manufacturer }}</p>
                     <label>Price:</label>
-                    {% if product.price == product.newPrice %}
-                        <p>{{ product.price }} HUF</p>
-                    {% else %}
-                        <p><s class="me-2">{{ product.newPrice }} HUF</s><span class="text-danger">{{ product.price }} HUF</span></p>
-                    {% endif %}
+                    <p>{{ product.newPrice }} HUF</p>
                 </div>
                 <div class="ms-auto d-flex">
-                    <button type="button" onclick="addToCart({{ product }})" class="btn btn-light"><i class="bi bi-plus-square" style="font-size: 2rem"></i></button>
+                    <button type="button" onclick="deleteFromCart({{ product.id }})" class="btn btn-light"><i class="bi bi-dash-square" style="font-size: 2rem"></i></button>
                 </div>
             </li>
         {% endfor %}
     </ul>
+
+
+    <div><hr class="dropdown-divider"></div>
+    <div class="container bg-light d-flex"><b class="ms-auto">= {{ cart.sum }} HUF</b></div>
 {% endblock %}

@@ -1,12 +1,13 @@
 <?php
 namespace App;
 
-use App\Controllers\HomeController;
+use App\Controllers\CartController;
 use App\Controllers\ProductController;
 
 $router = new Router();
 
-$router->get('/', HomeController::class, 'index');
-$router->get('/products', ProductController::class, 'index');
+$router->get('/', ProductController::class, 'index');
+$router->get('/cart', CartController::class, 'index');
+$router->post('/cart', CartController::class, 'getCart');
 
 $router->dispatch();

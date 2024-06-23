@@ -12,11 +12,11 @@ class Json {
      */
     public static function get($key)
     {
-        $content = file_get_contents("./storage/webshop.json");
+        $content = file_get_contents("./storage/data/$key.json");
 
         if($data = json_decode($content, true)){
             $array_of_objects = [];
-            foreach ($data[$key] as $row) {
+            foreach ($data as $row) {
                 $class = "\App\Models\\$key";
                 $array_of_objects[] = new $class($row);
             }
