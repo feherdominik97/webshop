@@ -25,6 +25,12 @@ class ProductController extends Controller
         $this->products = Json::get('Product') ?? [];
         $discounts = Json::get('Discount') ?? [];
 
+        foreach ($this->cart->getProducts() as $product) {
+            foreach ($discounts as $discount) {
+                $product->calculateNewPrice($discount);
+            }
+        }
+
         foreach ($this->products as $product) {
             foreach ($discounts as $discount) {
                 $product->calculateNewPrice($discount);

@@ -13,11 +13,14 @@ class Cart implements JsonSerializable
      */
     public function __construct($products)
     {
-        foreach ($products as $product) {
-            $product = new Product($product);
-            $this->products[] = $product;
-            $this->sum += $product->getNewPrice();
+        if(is_array($products) || is_object($products)){
+            foreach ($products as $product) {
+                $product = new Product($product);
+                $this->products[] = $product;
+                $this->sum += $product->getNewPrice();
+            }
         }
+
     }
 
     /**

@@ -25,4 +25,10 @@ class Json {
 
         return null;
     }
+
+    public static function put($key, $data)
+    {
+        $newJsonString = json_encode($data);
+        file_put_contents("./storage/data/$key.json", $newJsonString);
+    }
 }

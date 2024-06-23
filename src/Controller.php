@@ -10,7 +10,7 @@ use Twig\Loader\FilesystemLoader;
 
 class Controller
 {
-    private $twig;
+    public $twig;
     public function __construct()
     {
         $loader = new FilesystemLoader('../src/Views');

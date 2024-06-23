@@ -17,7 +17,7 @@
                     {% endif %}
                 </div>
                 <div class="ms-auto d-flex">
-                    <button type="button" onclick="addToCart({{ product }})" class="btn btn-light"><i class="bi bi-plus-square" style="font-size: 2rem"></i></button>
+                    <button onclick="addToCart({{ product.id }})" class="btn btn-light"><i class="bi bi-plus-square" style="font-size: 2rem"></i></button>
                 </div>
             </li>
         {% endfor %}

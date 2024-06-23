@@ -1,4 +1,4 @@
 <?php
 require '../vendor/autoload.php';
-session_start();
+//session_start();
 $router = require '../src/Routes/index.php';

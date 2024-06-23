@@ -39,17 +39,30 @@ class CartController extends Controller
      */
     public function index()
     {
-        $this->render('cart', ['cart' => $this->cart]);
+        echo $this->render('cart', ['cart' => $this->cart]);
     }
 
     public function store()
     {
+        $products = Json::get('Product');
+        foreach ($products as $product) {
+            if($product->getId() == $_POST['id']) {
+                $this->cart[] = $product;
+            }
+        }
 
-
+        Json::put('Cart', $this->cart);
     }
 
     public function destroy()
     {
+        $products = Json::get('Product');
+        foreach ($products as $product) {
+            if($product->getId() === $_POST['id']) {
+                $this->cart[] = $product;
+            }
+        }
 
+        Json::put('Cart', $this->cart);
     }
 }
