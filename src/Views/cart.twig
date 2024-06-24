@@ -2,7 +2,7 @@
 
 {% block list %}
     <ul class="list-group list-group-flush">
-        {% for product in cart.products %}
+        {% for key, product in cart.products %}
             <li class="container list-group-item d-flex bg-light">
                 <div>
                     <label>Name:</label>
@@ -13,7 +13,7 @@
                     <p>{{ product.newPrice }} HUF</p>
                 </div>
                 <div class="ms-auto d-flex">
-                    <button type="button" onclick="deleteFromCart({{ product.id }})" class="btn btn-light"><i class="bi bi-dash-square" style="font-size: 2rem"></i></button>
+                    <button type="button" onclick="deleteFromCart({{ key }})" class="btn btn-light"><i class="bi bi-dash-square" style="font-size: 2rem"></i></button>
                 </div>
             </li>
         {% endfor %}

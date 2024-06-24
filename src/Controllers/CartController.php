@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Controller;
 use App\Helpers\Json;
 use App\Models\Cart;
+use App\Helpers\Constants;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -13,23 +14,20 @@ use Twig\Error\SyntaxError;
 */
 class CartController extends Controller
 {
-    public $cart;
     public function __construct()
     {
         parent::__construct();
-        $this->cart = Json::get('Cart')[0] ?? new Cart([]);
-        $discounts = Json::get('Discount') ?? [];
+        $_SESSION[Constants::$CART_KEY] = $_SESSION[Constants::$CART_KEY] ?? (Json::get(Constants::$CART_KEY)[0] ?? new Cart([]));
+        $discounts = Json::get(Constants::$DISCOUNT_KEY) ?? [];
 
-        foreach ($this->cart->getProducts() as $product) {
-            foreach ($discounts as $discount) {
-                $product->calculateNewPrice($discount);
-            }
+        foreach ($_SESSION[Constants::$CART_KEY]->getProducts() as $product) {
+            $product->calculateNewPrice($discounts);
         }
     }
 
     public function getCart() {
         header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($this->cart);
+        echo json_encode($_SESSION[Constants::$CART_KEY]);
     }
 
     /**
@@ -39,30 +37,29 @@ class CartController extends Controller
      */
     public function index()
     {
-        echo $this->render('cart', ['cart' => $this->cart]);
+        $this->render('cart', ['cart' => $_SESSION[Constants::$CART_KEY]]);
     }
 
     public function store()
     {
-        $products = Json::get('Product');
+        $products = Json::get(Constants::$PRODUCT_KEY);
+        $discounts = Json::get(Constants::$DISCOUNT_KEY);
+
         foreach ($products as $product) {
             if($product->getId() == $_POST['id']) {
-                $this->cart[] = $product;
+                $product->calculateNewPrice($discounts);
+                $_SESSION[Constants::$CART_KEY]->addProduct($product);
             }
         }
 
-        Json::put('Cart', $this->cart);
+
+        Json::put(Constants::$CART_KEY, $_SESSION[Constants::$CART_KEY]);
     }
 
     public function destroy()
     {
-        $products = Json::get('Product');
-        foreach ($products as $product) {
-            if($product->getId() === $_POST['id']) {
-                $this->cart[] = $product;
-            }
-        }
+        $_SESSION[Constants::$CART_KEY]->removeProduct($_POST['key']);
 
-        Json::put('Cart', $this->cart);
+        Json::put(Constants::$CART_KEY, $_SESSION[Constants::$CART_KEY]);
     }
 }

@@ -1,13 +1,20 @@
 let addToCart = (id) => {
-    axios.post('/cart', { id })
+    let params = new URLSearchParams()
+    params.append('id', id)
+    axios.post('/cart', params)
+        .then(() => {
+            location.replace(location.href)
+        })
         .catch((e) => {
             console.log(e)
         })
 }
 
-let deleteFromCart = (id) => {
-    axios.delete('/cart', { id })
+let deleteFromCart = (key) => {
+    let params = new URLSearchParams()
+    params.append('key', key)
+    axios.post('/cart/delete', params)
         .then(() => {
-            location.reload()
+            location.replace(location.href)
         })
 }

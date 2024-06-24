@@ -13,7 +13,7 @@
                     {% if product.price == product.newPrice %}
                         <p>{{ product.price }} HUF</p>
                     {% else %}
-                        <p><s class="me-2">{{ product.newPrice }} HUF</s><span class="text-danger">{{ product.price }} HUF</span></p>
+                        <p><s class="me-2">{{ product.price }} HUF</s><span class="text-danger">{{ product.newPrice }} HUF</span></p>
                     {% endif %}
                 </div>
                 <div class="ms-auto d-flex">

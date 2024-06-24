@@ -4,8 +4,8 @@ namespace App\Controllers;
 
 use App\Controller;
 use App\Helpers\Json;
-use App\Models\Discount;
-use App\Models\Product;
+use App\Helpers\Constants;
+use App\Models\Cart;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -16,25 +16,20 @@ use Twig\Error\SyntaxError;
 class ProductController extends Controller
 {
     private $products;
-    private $cart;
     public function __construct()
     {
         parent::__construct();
 
-        $this->cart = Json::get('Cart')[0] ?? [];
-        $this->products = Json::get('Product') ?? [];
-        $discounts = Json::get('Discount') ?? [];
+        $_SESSION[Constants::$CART_KEY] = $_SESSION[Constants::$CART_KEY] ?? (Json::get(Constants::$CART_KEY)[0] ?? new Cart([]));
+        $this->products = Json::get(Constants::$PRODUCT_KEY) ?? [];
+        $discounts = Json::get(Constants::$DISCOUNT_KEY) ?? [];
 
-        foreach ($this->cart->getProducts() as $product) {
-            foreach ($discounts as $discount) {
-                $product->calculateNewPrice($discount);
-            }
+        foreach ($_SESSION[Constants::$CART_KEY]->getProducts() as $product) {
+            $product->calculateNewPrice($discounts);
         }
 
         foreach ($this->products as $product) {
-            foreach ($discounts as $discount) {
-                $product->calculateNewPrice($discount);
-            }
+            $product->calculateNewPrice($discounts);
         }
     }
 
@@ -47,7 +42,7 @@ class ProductController extends Controller
     {
         $this->render('index', [
             'products' => $this->products,
-            'cart' => $this->cart
+            'cart' => $_SESSION[Constants::$CART_KEY]
         ]);
     }
 }
