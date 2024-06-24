@@ -28,8 +28,6 @@ class Cart implements JsonSerializable
                 $this->products[] = $product;
                 $this->sum += $product->getNewPrice();
             }
-
-            $this->sum = round($this->sum);
         }
 
     }
@@ -41,8 +39,7 @@ class Cart implements JsonSerializable
     public function addProduct($product)
     {
         $this->products[] = $product;
-        $this->sum += $product->getNewPrice();
-        $this->sum = round($this->sum);
+        $this->calculateSum();
     }
 
     /**
@@ -51,9 +48,21 @@ class Cart implements JsonSerializable
      */
     public function removeProduct($key)
     {
-        $this->sum -= $this->products[$key]->getNewPrice();
         array_splice($this->products, $key, 1);
-        $this->sum = round($this->sum);
+        $this->calculateSum();
+    }
+
+    /**
+     * @return void
+     */
+    public function calculateSum()
+    {
+        $sum = 0;
+        foreach ($this->products as $product) {
+            $sum += $product->getNewPrice();
+        }
+
+        $this->sum = $sum;
     }
 
     /**
