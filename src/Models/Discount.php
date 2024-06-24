@@ -2,12 +2,31 @@
 
 namespace App\Models;
 
+/**
+ *
+ */
 class Discount
 {
+    /**
+     * @var mixed
+     */
     private $id;
+    /**
+     * @var mixed
+     */
     private $percentage;
+    /**
+     * @var mixed
+     */
     private $value;
+    /**
+     * @var Condition
+     */
     private $condition;
+
+    /**
+     * @param $discount
+     */
     public function __construct($discount)
     {
         $this->id = $discount['id'];
@@ -47,6 +66,10 @@ class Discount
     {
         $this->percentage = $percentage;
     }
+
+    /**
+     * @return float
+     */
     public function getValue(): float
     {
         return $this->value;
@@ -60,6 +83,9 @@ class Discount
         $this->value = $value;
     }
 
+    /**
+     * @return Condition
+     */
     public function getCondition(): Condition
     {
         return $this->condition;

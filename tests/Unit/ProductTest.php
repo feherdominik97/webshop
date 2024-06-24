@@ -5,7 +5,13 @@ use App\Models\Discount;
 use App\Models\Product;
 use PHPUnit\Framework\TestCase;
 
+/**
+ *
+ */
 class ProductTest extends TestCase {
+    /**
+     * @return void
+     */
     public function testClassConstructor()
     {
         $product_array = [
@@ -22,6 +28,10 @@ class ProductTest extends TestCase {
             $this->assertSame($product, $product_object->{'get' . ucfirst($key)}());
         }
     }
+
+    /**
+     * @return void
+     */
     public function testCalculateNewPrice()
     {
         $price = 2000;

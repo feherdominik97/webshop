@@ -5,8 +5,14 @@ namespace Unit;
 use App\Models\Discount;
 use PHPUnit\Framework\TestCase;
 
+/**
+ *
+ */
 class DiscountTest extends TestCase
 {
+    /**
+     * @return void
+     */
     public function testClassConstructor()
     {
         $discount_array = [

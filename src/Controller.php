@@ -8,9 +8,19 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Twig\Loader\FilesystemLoader;
 
+/**
+ *
+ */
 class Controller
 {
+    /**
+     * @var Environment
+     */
     public $twig;
+
+    /**
+     *
+     */
     public function __construct()
     {
         $loader = new FilesystemLoader('../src/Views');

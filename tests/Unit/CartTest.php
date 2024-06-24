@@ -6,8 +6,14 @@ use App\Models\Cart;
 use App\Models\Product;
 use PHPUnit\Framework\TestCase;
 
+/**
+ *
+ */
 class CartTest extends TestCase
 {
+    /**
+     * @return void
+     */
     public function testClassConstructor()
     {
         $products = [
@@ -52,6 +58,9 @@ class CartTest extends TestCase
         $this->assertSame($sum, $cart->getSum());
     }
 
+    /**
+     * @return void
+     */
     public function testAddProduct()
     {
         $products = [
@@ -101,6 +110,9 @@ class CartTest extends TestCase
         $this->assertSame($cart->getSum(), $sum);
     }
 
+    /**
+     * @return void
+     */
     public function testRemoveProduct()
     {
         $products = [

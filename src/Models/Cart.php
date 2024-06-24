@@ -3,9 +3,18 @@ namespace App\Models;
 
 use JsonSerializable;
 
+/**
+ *
+ */
 class Cart implements JsonSerializable
 {
+    /**
+     * @var array
+     */
     private $products = [];
+    /**
+     * @var float|int
+     */
     private $sum = 0;
 
     /**
@@ -25,6 +34,10 @@ class Cart implements JsonSerializable
 
     }
 
+    /**
+     * @param $product
+     * @return void
+     */
     public function addProduct($product)
     {
         $this->products[] = $product;
@@ -32,6 +45,10 @@ class Cart implements JsonSerializable
         $this->sum = round($this->sum);
     }
 
+    /**
+     * @param $key
+     * @return void
+     */
     public function removeProduct($key)
     {
         $this->sum -= $this->products[$key]->getNewPrice();
@@ -71,6 +88,9 @@ class Cart implements JsonSerializable
         $this->sum = $sum;
     }
 
+    /**
+     * @return array
+     */
     public function jsonSerialize(): array
     {
         return get_object_vars($this);

@@ -15,7 +15,14 @@ use Twig\Error\SyntaxError;
  */
 class ProductController extends Controller
 {
+    /**
+     * @var array|mixed
+     */
     private $products;
+
+    /**
+     *
+     */
     public function __construct()
     {
         parent::__construct();

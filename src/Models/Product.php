@@ -9,10 +9,25 @@ use JsonSerializable;
  */
 class Product implements JsonSerializable
 {
+    /**
+     * @var int|mixed
+     */
     private $id;
+    /**
+     * @var mixed|string
+     */
     private $name;
+    /**
+     * @var int|mixed
+     */
     private $price;
+    /**
+     * @var int|mixed
+     */
     private $newPrice;
+    /**
+     * @var mixed|string
+     */
     private $manufacturer;
 
     /**
@@ -125,6 +140,10 @@ class Product implements JsonSerializable
     {
         $this->manufacturer = $manufacturer;
     }
+
+    /**
+     * @return array
+     */
     public function jsonSerialize(): array
     {
         return get_object_vars($this);

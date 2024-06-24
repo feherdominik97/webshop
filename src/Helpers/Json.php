@@ -30,6 +30,11 @@ class Json {
         return null;
     }
 
+    /**
+     * @param $key
+     * @param $data
+     * @return void
+     */
     public static function put($key, $data)
     {
         $ree = file_put_contents("./storage/data/$key.json", json_encode($data));

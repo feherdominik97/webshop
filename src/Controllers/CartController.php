@@ -14,6 +14,9 @@ use Twig\Error\SyntaxError;
 */
 class CartController extends Controller
 {
+    /**
+     *
+     */
     public function __construct()
     {
         parent::__construct();
@@ -25,6 +28,9 @@ class CartController extends Controller
         }
     }
 
+    /**
+     * @return void
+     */
     public function getCart() {
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($_SESSION[Constants::$CART_KEY]);
@@ -40,6 +46,9 @@ class CartController extends Controller
         $this->render('cart', ['cart' => $_SESSION[Constants::$CART_KEY]]);
     }
 
+    /**
+     * @return void
+     */
     public function store()
     {
         $products = Json::get(Constants::$PRODUCT_KEY);
@@ -56,6 +65,9 @@ class CartController extends Controller
         Json::put(Constants::$CART_KEY, $_SESSION[Constants::$CART_KEY]);
     }
 
+    /**
+     * @return void
+     */
     public function destroy()
     {
         $_SESSION[Constants::$CART_KEY]->removeProduct($_POST['key']);

@@ -2,11 +2,23 @@
 
 namespace App\Models;
 
+/**
+ *
+ */
 class Condition
 {
+    /**
+     * @var mixed
+     */
     private $property;
+    /**
+     * @var mixed
+     */
     private $value;
 
+    /**
+     * @param $condition
+     */
     public function __construct($condition)
     {
         $this->property = $condition['property'];
